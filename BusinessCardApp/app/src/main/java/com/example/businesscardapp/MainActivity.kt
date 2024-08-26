@@ -8,12 +8,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -33,55 +37,73 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(
-                        name = "Joshua George",
-                        about = "Android Developer",
-                        modifier = Modifier.padding(16.dp) // Use a specific padding value
-                    )
-                    GreetingImage(
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Column(
+                        verticalArrangement = Arrangement.Top // Place items at the top
+                    ) {
+                        GreetingImage(
+                            modifier = Modifier
+                                .fillMaxWidth().height(400.dp)
+                                .weight(1f)
+                        )
+                        Greeting(
+                            name = "Joshua George",
+                            about = "Android Developer",
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
                 }
             }
         }
     }
 }
+
 @Composable
 fun GreetingImage(modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.josh)
-    Box(modifier) {
-        Image(
-            painter = image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop
-        )
-//        GreetingText(
-//            message = message,
-//            from = from,
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(8.dp)
-//        )
+    val image = painterResource(id = R.drawable.josh)
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Row {
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+        }
     }
 }
 
 @Composable
 fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
+    val image = painterResource(id = R.drawable.josh)
     Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
+        verticalArrangement = Arrangement.Center, // Center text vertically
+        horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
+        modifier = modifier.fillMaxSize()
     ) {
+        Row {
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+                modifier = 
+            )
+        }
+        Row {
+            Text(
+                text = name,
+                fontSize = 48.sp,
+                lineHeight = 64.sp,
+                textAlign = TextAlign.Center
+            )
+        }
         Text(
-            text = "$name",
-            fontSize = 48.sp,
-            lineHeight = 64.sp,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = "          $about",
+            text = about,
             fontSize = 20.sp,
             lineHeight = 64.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
 }
@@ -93,6 +115,10 @@ fun GreetingPreview() {
         Greeting(
             name = "Joshua George",
             about = "Android Developer"
+        )
+        GreetingImage(
+            modifier = Modifier
+                .fillMaxSize()
         )
     }
 }
