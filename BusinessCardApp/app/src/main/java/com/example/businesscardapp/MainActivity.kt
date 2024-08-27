@@ -26,9 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscardapp.ui.theme.BusinessCardAppTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material3.Icon
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,27 +38,25 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column(
+                        modifier = Modifier.padding(16.dp), // Add padding to the whole column
                         verticalArrangement = Arrangement.Top // Place items at the top
                     ) {
-//                        GreetingImage(
-//                            modifier = Modifier
-//                                .fillMaxWidth().height(400.dp)
-//                                .weight(1f)
-//                        )
+                        GreetingImage(
+                            modifier = Modifier.fillMaxSize()
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        )
                         Greeting(
                             name = "Joshua George",
                             about = "Student at Fremd High School",
                             modifier = Modifier.padding(16.dp)
                         )
                         Socials(
-
                             mail = "joshuageorge9@gmail.com",
                             phone = "847-737-2921",
                             github = "https://github.com/joshua-george",
                             modifier = Modifier.padding(16.dp)
                         )
-
-
                     }
                 }
             }
@@ -73,44 +68,31 @@ class MainActivity : ComponentActivity() {
 fun GreetingImage(modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.josh)
     Box(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Row {
-            Image(
-                painter = image,
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
-        }
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop
+        )
     }
 }
 
 @Composable
 fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
-    val image = painterResource(id = R.drawable.josh)
     Column(
         verticalArrangement = Arrangement.Center, // Center text vertically
         horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
     ) {
-        Row (modifier = Modifier.padding(bottom = 40.dp)){
-            Image(
-                painter = image,
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-
-            )
-        }
-        Row  {
-            Text(
-                text = name,
-                fontSize = 48.sp,
-                lineHeight = 64.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        Text (
+        Text(
+            text = name,
+            fontSize = 38.sp,
+            lineHeight = 64.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
             text = about,
             fontSize = 20.sp,
             lineHeight = 64.sp,
@@ -121,11 +103,11 @@ fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Socials(mail: String, phone: String, github: String, modifier: Modifier = Modifier){
+fun Socials(mail: String, phone: String, github: String, modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center, // Center text vertically
         horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
         Text(
             text = mail,
@@ -148,31 +130,27 @@ fun Socials(mail: String, phone: String, github: String, modifier: Modifier = Mo
     }
 }
 
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     BusinessCardAppTheme {
-        Row {
+        Column(modifier = Modifier.padding(16.dp)) { // Added padding to the preview column
+            GreetingImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
             Greeting(
                 name = "Joshua George",
                 about = "Student at Fremd High School",
-                modifier = Modifier.padding(12.dp)
+                modifier = Modifier.padding(16.dp)
+            )
+            Socials(
+                mail = "joshuageorge9@gmail.com",
+                phone = "847-737-2921",
+                github = "https://github.com/joshua-george",
+                modifier = Modifier.padding(16.dp)
             )
         }
-//        GreetingImage(
-//            modifier = Modifier
-//                .fillMaxSize()
-//        )
-
-        Socials(
-            mail = "joshuageorge9@gmail.com",
-            phone = "847-737-2921",
-            github = "https://github.com/joshua-george",
-            modifier = Modifier.padding(16.dp)
-        )
-
     }
 }
