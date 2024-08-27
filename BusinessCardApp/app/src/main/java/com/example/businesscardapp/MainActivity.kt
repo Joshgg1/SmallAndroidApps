@@ -26,6 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscardapp.ui.theme.BusinessCardAppTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material3.Icon
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,16 +43,25 @@ class MainActivity : ComponentActivity() {
                     Column(
                         verticalArrangement = Arrangement.Top // Place items at the top
                     ) {
-                        GreetingImage(
-                            modifier = Modifier
-                                .fillMaxWidth().height(400.dp)
-                                .weight(1f)
-                        )
+//                        GreetingImage(
+//                            modifier = Modifier
+//                                .fillMaxWidth().height(400.dp)
+//                                .weight(1f)
+//                        )
                         Greeting(
                             name = "Joshua George",
-                            about = "Android Developer",
+                            about = "Student at Fremd High School",
                             modifier = Modifier.padding(16.dp)
                         )
+                        Socials(
+
+                            mail = "joshuageorge9@gmail.com",
+                            phone = "847-737-2921",
+                            github = "https://github.com/joshua-george",
+                            modifier = Modifier.padding(16.dp)
+                        )
+
+
                     }
                 }
             }
@@ -82,15 +94,15 @@ fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
         modifier = modifier.fillMaxSize()
     ) {
-        Row {
+        Row (modifier = Modifier.padding(bottom = 40.dp)){
             Image(
                 painter = image,
                 contentDescription = null,
                 contentScale = ContentScale.Crop
-                modifier = 
+
             )
         }
-        Row {
+        Row  {
             Text(
                 text = name,
                 fontSize = 48.sp,
@@ -98,7 +110,7 @@ fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        Text(
+        Text (
             text = about,
             fontSize = 20.sp,
             lineHeight = 64.sp,
@@ -108,17 +120,59 @@ fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun Socials(mail: String, phone: String, github: String, modifier: Modifier = Modifier){
+    Column(
+        verticalArrangement = Arrangement.Center, // Center text vertically
+        horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
+        modifier = modifier
+    ) {
+        Text(
+            text = mail,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = phone,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = github,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+
+
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     BusinessCardAppTheme {
-        Greeting(
-            name = "Joshua George",
-            about = "Android Developer"
+        Row {
+            Greeting(
+                name = "Joshua George",
+                about = "Student at Fremd High School",
+                modifier = Modifier.padding(12.dp)
+            )
+        }
+//        GreetingImage(
+//            modifier = Modifier
+//                .fillMaxSize()
+//        )
+
+        Socials(
+            mail = "joshuageorge9@gmail.com",
+            phone = "847-737-2921",
+            github = "https://github.com/joshua-george",
+            modifier = Modifier.padding(16.dp)
         )
-        GreetingImage(
-            modifier = Modifier
-                .fillMaxSize()
-        )
+
     }
 }
