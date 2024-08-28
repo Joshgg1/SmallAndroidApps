@@ -5,27 +5,29 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Phone
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscardapp.ui.theme.BusinessCardAppTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,15 +36,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             BusinessCardAppTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     Column(
-                        modifier = Modifier.padding(16.dp), // Add padding to the whole column
-                        verticalArrangement = Arrangement.Top // Place items at the top
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
                         GreetingImage(
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .height(200.dp)
                         )
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
                         Socials(
                             mail = "joshuageorge9@gmail.com",
                             phone = "847-737-2921",
-                            github = "https://github.com/joshua-george",
+                            social = "joshg_0",
                             modifier = Modifier.padding(16.dp)
                         )
                     }
@@ -63,12 +65,22 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+//@Composable
+//fun extraStuff(modifier: Modifier = Modifier){
+//
+//    Icon(
+//        Icons.Rounded.Email,
+//        contentDescription = "Email",
+//        modifier = Modifier.padding(top = 4.dp).scale(1.25f).padding(horizontal = 16.dp),
+//    )
+//}
 
 @Composable
 fun GreetingImage(modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.josh)
+
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Image(
@@ -82,15 +94,16 @@ fun GreetingImage(modifier: Modifier = Modifier) {
 @Composable
 fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
     Column(
-        verticalArrangement = Arrangement.Center, // Center text vertically
-        horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
-        modifier = modifier
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
+            color = Color(0xFF278F0D),
             text = name,
             fontSize = 38.sp,
             lineHeight = 64.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
         )
         Text(
             text = about,
@@ -103,38 +116,66 @@ fun Greeting(name: String, about: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Socials(mail: String, phone: String, github: String, modifier: Modifier = Modifier) {
+fun Socials(mail: String, phone: String, social: String, modifier: Modifier = Modifier) {
     Column(
-        verticalArrangement = Arrangement.Center, // Center text vertically
-        horizontalAlignment = Alignment.CenterHorizontally, // Center horizontally
-        modifier = modifier.fillMaxSize()
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = mail,
-            fontSize = 16.sp,
-            lineHeight = 24.sp,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = phone,
-            fontSize = 16.sp,
-            lineHeight = 24.sp,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = github,
-            fontSize = 16.sp,
-            lineHeight = 24.sp,
-            textAlign = TextAlign.Center
-        )
+        Row {
+            Icon(
+                Icons.Rounded.Email,
+                contentDescription = "Email",
+                modifier = Modifier.padding(top = 4.dp).scale(1.25f).padding(horizontal = 16.dp),
+            )
+            Text(
+                text = mail,
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        Row {
+            Icon(
+                Icons.Rounded.Phone,
+                contentDescription = "Localized description",
+                modifier = Modifier.padding(top = 4.dp).scale(1.25f).padding(horizontal = 16.dp),
+            )
+            Text(
+                text = phone,
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        Row {
+            Icon(
+                Icons.Rounded.Person,
+                contentDescription = "Localized description",
+                modifier = Modifier.padding(top = 4.dp).scale(1.25f).padding(horizontal = 16.dp),
+            )
+            Text(
+                text = social,
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val customColor = Color(red = 100, green = 180, blue = 255)
     BusinessCardAppTheme {
-        Column(modifier = Modifier.padding(16.dp)) { // Added padding to the preview column
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize()
+                .background(customColor),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             GreetingImage(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -148,7 +189,7 @@ fun GreetingPreview() {
             Socials(
                 mail = "joshuageorge9@gmail.com",
                 phone = "847-737-2921",
-                github = "https://github.com/joshua-george",
+                social = "joshg_0",
                 modifier = Modifier.padding(16.dp)
             )
         }
