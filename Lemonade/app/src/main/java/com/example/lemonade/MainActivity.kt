@@ -26,9 +26,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-
 }
+
 @Composable
 fun LemonApp() {
     var step by remember { mutableStateOf(1) }
@@ -44,23 +43,59 @@ fun LemonApp() {
     ) {
         when (step) {
             1 -> {
+                // Step 1: Tap the lemon tree to select a lemon
                 LemonStep(
                     imageId = R.drawable.lemon_tree,
-                    textId = R.string.tapSelect,
-                    contentDescriptionId = R.string.lemonTree,
+                    textId = R.string.tap_select,
+                    contentDescriptionId = R.string.lemon_tree,
                     onClick = {
                         step = 2
-                        tapCount = (2..4).random()
-                        currentTapCount = 0
+                        tapCount = (2..4).random() // Generate random tap count between 2 and 4
+                        currentTapCount = 0 // Reset the current taps
                     }
                 )
             }
-            // Add other steps logic here when needed
+            2 -> {
+                // Step 2: Tap the lemon to squeeze it
+                LemonStep(
+                    imageId = R.drawable.lemon_squeeze,
+                    textId = R.string.keepTapping,
+                    contentDescriptionId = R.string.Lemon,
+                    onClick = {
+                        currentTapCount++
+                        if (currentTapCount >= tapCount) {
+                            step = 3 // Move to the next step after enough taps
+                        }
+                    }
+                )
+            }
+            3 -> {
+                // Step 3: Tap the lemonade to drink it
+                LemonStep(
+                    imageId = R.drawable.lemon_drink,
+                    textId = R.string.tapDrink,
+                    contentDescriptionId = R.string.lemGlass,
+                    onClick = {
+                        step = 4 // Move to the empty glass step
+                    }
+                )
+            }
+            4 -> {
+                // Step 4: Tap the empty glass to restart
+                LemonStep(
+                    imageId = R.drawable.lemon_restart,
+                    textId = R.string.tapRestart,
+                    contentDescriptionId = R.string.emGlass,
+                    onClick = {
+                        step = 1 // Restart the process
+                    }
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Your Button, after the LemonStep
+        // Example button (you can add logic here)
         Button(onClick = { /*TODO*/ }) {
             Text(stringResource(R.string.roll))
         }
@@ -93,5 +128,3 @@ fun DefaultPreview() {
         LemonApp()
     }
 }
-
-
