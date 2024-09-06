@@ -62,13 +62,30 @@ class MainActivity : ComponentActivity() {
 
         var currentTapCount by remember { mutableStateOf(0) }
 
-        Column(modifier = modifier.fillMaxSize(),
-            verticalArrangement =  Arrangement.Center,
-            horizontalAlignment = Arrangement.CenterHorizontally){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        )
 
+        when(step){
+            1 -> {
+                LemonStep(
+                    imageId = R.drawable.lemon_tree,
+                    textId = R.string.tap_select,
+                    contentDescriptionId = R.string.lemon_tree,
+                    onClick = {
+                        step = 2
+                        tapCount = (2..4).random()
+                        currentTapCount = 0 
+                    }
+                )
+            }
         }
 
-        )
+
     }
 }
 
