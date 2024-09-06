@@ -46,8 +46,8 @@ fun LemonApp() {
                 // Step 1: Tap the lemon tree to select a lemon
                 LemonStep(
                     imageId = R.drawable.lemon_tree,
-                    textId = R.string.tap_select,
-                    contentDescriptionId = R.string.lemon_tree,
+                    textId = R.string.tapSelect,
+                    contentDescriptionId = R.string.lemonTree,
                     onClick = {
                         step = 2
                         tapCount = (2..4).random() // Generate random tap count between 2 and 4
