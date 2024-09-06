@@ -28,6 +28,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lemonade.ui.theme.LemonadeTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.Alignment
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +45,7 @@ class MainActivity : ComponentActivity() {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Add a Button with the text from string resources
-                    Button(onClick = { /*TODO*/ }) {
+                        Button(onClick = { /*TODO*/ }) {
                         Text(stringResource(R.string.roll))
                     }
                 }
@@ -51,7 +55,13 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun LemonApp() {
-        // A surface container using the 'background' color from the theme
+
+        var step by remember { mutableStateOf(1) }
+
+        var tapCount by remember { mutableStateOf((2..4).random()) }
+
+        var currentTapCount by remember { mutableStateOf(0) }
+
         Column(modifier = modifier.fillMaxSize(),
             verticalArrangement =  Arrangement.Center,
             horizontalAlignment = Arrangement.CenterHorizontally){
@@ -66,6 +76,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     LemonadeTheme {
-        LemonApp()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(onClick = { /*TODO*/ }) {
+                Text(stringResource(R.string.roll))
+            }
+        }
     }
 }
