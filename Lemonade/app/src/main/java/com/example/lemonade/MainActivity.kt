@@ -27,41 +27,42 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun LemonApp() {
-        var step by remember { mutableStateOf(1) }
-        var tapCount by remember { mutableStateOf((2..4).random()) }
-        var currentTapCount by remember { mutableStateOf(0) }
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            when (step) {
-                1 -> {
-                    LemonStep(
-                        imageId = R.drawable.lemon_tree,
-                        textId = R.string.tap_select,
-                        contentDescriptionId = R.string.lemon_tree,
-                        onClick = {
-                            step = 2
-                            tapCount = (2..4).random()
-                            currentTapCount = 0
-                        }
-                    )
-                }
-                // Add other steps logic here when needed
+}
+@Composable
+fun LemonApp() {
+    var step by remember { mutableStateOf(1) }
+    var tapCount by remember { mutableStateOf((2..4).random()) }
+    var currentTapCount by remember { mutableStateOf(0) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        when (step) {
+            1 -> {
+                LemonStep(
+                    imageId = R.drawable.lemon_tree,
+                    textId = R.string.tapSelect,
+                    contentDescriptionId = R.string.lemonTree,
+                    onClick = {
+                        step = 2
+                        tapCount = (2..4).random()
+                        currentTapCount = 0
+                    }
+                )
             }
+            // Add other steps logic here when needed
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-            // Your Button, after the LemonStep
-            Button(onClick = { /*TODO*/ }) {
-                Text(stringResource(R.string.roll))
-            }
+        // Your Button, after the LemonStep
+        Button(onClick = { /*TODO*/ }) {
+            Text(stringResource(R.string.roll))
         }
     }
 }
@@ -92,3 +93,5 @@ fun DefaultPreview() {
         LemonApp()
     }
 }
+
+
