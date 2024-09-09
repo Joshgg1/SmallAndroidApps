@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import com.example.lemonade.ui.theme.LemonadeTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,22 +42,20 @@ fun LemonApp() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-
     ) {
         // Centered title with yellow background at the top
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color(0xFFFFE082))
-                .padding(vertical = 16.dp)
-                ,
+                .padding(vertical = 16.dp),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Lemonade",
-                fontSize = 24.sp, // Adjust the font size as needed
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold, // Bold text
                 modifier = Modifier.align(Alignment.Center)
-
             )
         }
 
@@ -123,7 +122,6 @@ fun LemonApp() {
     }
 }
 
-
 @Composable
 fun LemonStep(
     imageId: Int,
@@ -134,6 +132,7 @@ fun LemonStep(
     Text(
         text = stringResource(id = textId),
         fontSize = 18.sp,
+        fontWeight = FontWeight.Bold, // Bold text
         modifier = Modifier.padding(16.dp)
     )
     Spacer(modifier = Modifier.height(16.dp))
